@@ -34,8 +34,11 @@ public class ContaCorrente {
     void transferir(Double valor, ContaCorrente destino) {
     }
 
-    public void sacar(Double saldo) {
-        this.saldo -= saldo;
+    public void sacar(Double value) {
+        if (value > saldo) {
+            throw new IllegalArgumentException("Saldo insuficiente para esta transação");
+        }
+        saldo -= value;
     }
 
     boolean cancelar(String justificativa) {
@@ -48,5 +51,13 @@ public class ContaCorrente {
 
     List consultarExtrato(Date dataInicio, Date dataFinal) {
         return null;
+    }
+
+    public void depositar(Double value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("O valor do deposito deve ser superior a 0");
+        }
+
+        saldo += value;
     }
 }
