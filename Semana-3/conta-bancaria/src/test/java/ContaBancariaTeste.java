@@ -48,11 +48,11 @@ public class ContaBancariaTeste {
         Assertions.assertEquals(expectativa, resultado);
     }
 
-    @DisplayName("Testando o metodo de cancelar a conta")
+    @DisplayName("Testando o metodo de cancelar a conta sem a justificativa")
     @Test
     void testarCancelarConta() {
         ContaCorrente contaFelipe = new ContaCorrente(1,1,"Felipe");
-        Boolean expectativa = contaFelipe.cancelar("alguma ");
+        Boolean expectativa = contaFelipe.cancelar("g ");
         Assertions.assertTrue(expectativa);
     }
 
