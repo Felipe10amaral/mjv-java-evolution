@@ -9,15 +9,42 @@ public class ContaCorrente {
     private Double saldo = 0.0;
     private Integer numeroConta;
     private Integer numeroAgencia;
-    private String nomeCliente;
+
     private LocalDate data;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Integer getNumeroConta() {
+        return numeroConta;
+    }
+
+    public void setNumeroConta(Integer numeroConta) {
+        this.numeroConta = numeroConta;
+    }
+
+    public Integer getNumeroAgencia() {
+        return numeroAgencia;
+    }
+
+    public void setNumeroAgencia(Integer numeroAgencia) {
+        this.numeroAgencia = numeroAgencia;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    private Cliente cliente;
     private Boolean cancelada;
     private List<Operacao> operacoes;
 
-    public ContaCorrente(Integer numeroConta, Integer numeroAgencia, String nomeCliente, LocalDate data){
+    public ContaCorrente() {}
+    public ContaCorrente(Integer numeroConta, Integer numeroAgencia, LocalDate data){
         this.numeroAgencia = numeroAgencia;
         this.numeroConta = numeroConta;
-        this.nomeCliente = nomeCliente;
+
         cancelada = false;
     }
 
