@@ -1,7 +1,7 @@
 package org.digytal;
 
 import exception.ContaException;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,6 +11,21 @@ public class ContaCorrente {
     private Integer numeroAgencia;
 
     private LocalDate data;
+
+    private Cliente cliente;
+    private Boolean cancelada;
+    private List<Operacao> operacoes = new ArrayList<Operacao>();
+
+    public ContaCorrente() {
+        cancelada = false;
+
+    }
+    public ContaCorrente(Integer numeroConta, Integer numeroAgencia, LocalDate data){
+        this.numeroAgencia = numeroAgencia;
+        this.numeroConta = numeroConta;
+
+        cancelada = false;
+    }
 
     public Cliente getCliente() {
         return cliente;
@@ -36,18 +51,6 @@ public class ContaCorrente {
         this.cliente = cliente;
     }
 
-    private Cliente cliente;
-    private Boolean cancelada;
-    private List<Operacao> operacoes;
-
-    public ContaCorrente() {}
-    public ContaCorrente(Integer numeroConta, Integer numeroAgencia, LocalDate data){
-        this.numeroAgencia = numeroAgencia;
-        this.numeroConta = numeroConta;
-
-        cancelada = false;
-    }
-
     public Double getSaldo() {
         return saldo;
     }
@@ -55,10 +58,12 @@ public class ContaCorrente {
     public void depositar(Double valor)  {
         validarDeposito(valor);
         saldo += valor;
+        operacoes.add(new Operacao("deposito", valor));
     }
     public Double sacar(Double valor) {
         validarSaque(valor);
         saldo -= valor;
+        operacoes.add(new Operacao("saque", valor));
         return saldo;
     }
 
@@ -69,6 +74,7 @@ public class ContaCorrente {
       validarSaque(valor);
       sacar(valor);
       destino.depositar(valor);
+      operacoes.add(new Operacao("transferencia", valor));
     }
 
     public boolean cancelar(String justificativa) {
@@ -119,13 +125,13 @@ public class ContaCorrente {
         }
 
         //expressão lambda
-        return operacoes
-                // stream: permite percorrer uma lista de forma declarativa
-                .stream()
-                //filter: filtrar os resultados que eu estou aguardando| Ex: extrato da data inicial ate a data final
+        // stream: permite percorrer uma lista de forma declarativa
+        //filter: filtrar os resultados que eu estou aguardando| Ex: extrato da data inicial ate a data final
+        //toList: retorna uma nova lista com novos valores
+        return operacoes;
+               /* .stream()
                 .filter( element -> element.getData().isAfter(dataInicial) && element.getData().isBefore(dataFinal))
-                //toList: retorna uma nova lista com novos valores
-                .toList();
+                .toList(); */
     }
 
 
