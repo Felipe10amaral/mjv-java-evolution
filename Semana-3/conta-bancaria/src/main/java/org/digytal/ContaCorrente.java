@@ -124,14 +124,9 @@ public class ContaCorrente {
             throw new IllegalArgumentException("Data inicial não pode ser posterior a data final");
         }
 
-        //expressão lambda
-        // stream: permite percorrer uma lista de forma declarativa
-        //filter: filtrar os resultados que eu estou aguardando| Ex: extrato da data inicial ate a data final
-        //toList: retorna uma nova lista com novos valores
+
         return operacoes;
-               /* .stream()
-                .filter( element -> element.getData().isAfter(dataInicial) && element.getData().isBefore(dataFinal))
-                .toList(); */
+
     }
 
 
