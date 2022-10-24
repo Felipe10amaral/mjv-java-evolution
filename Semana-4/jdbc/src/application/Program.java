@@ -10,16 +10,16 @@ import database.DbException;
 
 public class Program {
 	public static void main(String[] args) {
-		Connection conect;
+		Connection conect = null; // é necessario ser inicializada apontando para nulo logo de inicio
 		
 		// essa classe serve para voce montar um comando sql para ser executado
-		Statement st;
+		Statement st = null;
 		
 		/*
 		 * essa classe vai representar para gente um objeto contendo o resultado da nossa consulta
 		 * na forma de tabela 
 		 */
-		ResultSet rs;
+		ResultSet rs = null;
 		
 		try {
 			conect = DB.getConecction();
@@ -34,9 +34,15 @@ public class Program {
 			}
 		}
 		catch (SQLException e) {
-			throw new DbException(e.getMessage());
+			e.printStackTrace();
+		}
+		finally {  //como essas classes são externas e não são controladas pela JVM, é interessante fecharmos manualmente
+			DB.closeResultSet(rs);
+			DB.closeStatement(st);
+			DB.closeConnection();
 		}
 		
 	}
 
 }
+
